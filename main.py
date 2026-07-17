@@ -4,6 +4,7 @@ from routers import product_router, user_routers
 from db_config import collection, user_collection
 from models import FileModel
 import os
+import time
 from contextlib import asynccontextmanager
 
 
@@ -116,21 +117,32 @@ def upload_save_mul_files(files: list[UploadFile] = File(...)):
 
 
 # Testing Middel Ware
-@app.middleware("http")
-async def my_middleware(request: Request, call_next):
-    print("Middleware : before handling request")
+# @app.middleware("http")
+# async def my_middleware(request: Request, call_next):
+#     print("Middleware : before handling request")
 
-    # Is the user logged in?
-    # Is there a valid session or JWT token?
-    # Is the token expired?
+#     # Is the user logged in?
+#     # Is there a valid session or JWT token?
+#     # Is the token expired?
+
+#     # if good then continue
+#     response = await call_next(request)  # Continue to the profile endpoint and Runs it.
+
+#     print("Middleware : after handling request but before returning response")#do any working on response
+#         # Add security headers
+#         # Compress data
+#         # Log request time
+#     return response
+
+
+@app.middleware("http")
+async def processing_time(request: Request, call_next):
     
-    # if good then continue
-    response = await call_next(request)  # Continue to the profile endpoint and Runs it.
-    
-    print("Middleware : after handling request but before returning response")#do any working on response
-        # Add security headers
-        # Compress data
-        # Log request time
+    start_time = round(time.time(), 3)
+    print(start_time)
+    response = await call_next(request)
+    execution_time = round(time.time() - start_time, 3)
+    print(execution_time)
     return response
 
 
