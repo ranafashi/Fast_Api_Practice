@@ -2,6 +2,7 @@ from db_config import collection
 from fastapi import HTTPException, status, Query
 from models import Product
 from pymongo import ReturnDocument
+from log.logs import logger
 
 
 # api get all products
@@ -16,12 +17,19 @@ def all_products():
 
 
 # api add only 1 Product
+# applying logs
+
+
 def add_product(product: Product):
+
     if collection.find_one({"id": product.id}):
+        logger.warning(f"Add Product Failed :{product.id} already exists ")
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST, detail="Product alreay exists"
         )
+
     collection.insert_one(product.model_dump())
+    logger.info(f"Product added: id={product.id}, name='{product.name}'")
     return {"message": "Product Added Successfully", "product": product}
 
 
@@ -29,12 +37,14 @@ def add_product(product: Product):
 def add_prod_list(product: list[Product]):
     ids = [p.id for p in product]
     if len(ids) != len(set(ids)):
+        logger.warning(f"Duplicate IDs")
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST, detail="Duplicate ids"
         )
 
     existing_prod = list(collection.find({"id": {"$in": ids}}))
     if existing_prod:
+        logger.warning(f"Product Already Exists")
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST, detail="Product already exists"
         )
@@ -64,6 +74,7 @@ def update_prod(id: int, product: Product, name: str = None):
         projection={"_id": 0},
         return_document=ReturnDocument.AFTER,
     )
+    logger.info(f"Product Updated : id = {id} , name = {name}")
     return result
 
 
@@ -80,9 +91,9 @@ def del_prod_list(id: list[int] = Query(...), name: str = None):
 # Aggregation functions  testing
 
 
-# match filtering 
-#making it dynamic
-def prod_categories(category:str):
+# match filtering
+# making it dynamic
+def prod_categories(category: str):
     cat = list(
         collection.aggregate(
             [
