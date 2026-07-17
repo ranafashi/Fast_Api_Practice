@@ -1,100 +1,140 @@
-from fastapi import FastAPI, HTTPException, Request, status
-from models import Product, User, EmailStr
-from DB_Config import collection
-
-app = FastAPI()
-products = [
-    Product(
-        id=1, name="Iphone", description="lattest apple phone", price=1000, quantity=10
-    ),
-    Product(
-        id=2,
-        name="Samsung Washing machine",
-        description="lattest washing machne",
-        price=10000,
-        quantity=50,
-    ),
-]
+from fastapi import FastAPI, Depends, Request, Header, Cookie, Form, UploadFile, File
+from fastapi.responses import JSONResponse
+from routers import product_router, user_routers
+from db_config import collection, user_collection
+from models import FileModel
+import os
+from contextlib import asynccontextmanager
 
 
-@app.get("/")
-def homePage():
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    print("!!!!!!!!!!!!!!!!Starting Server !!!!!!!!!!!!!!!!!!!!!!!!")
+    collection.create_index("id", unique=True)
+    user_collection.create_index("email", unique=True)
+    yield
+    print("!!!!!!!!!!!!!!!!Shuting Down Server !!!!!!!!!!!!!!!!!!!!!!!!")
+
+
+app = FastAPI(lifespan=lifespan)
+
+
+app.include_router(product_router.router)
+app.include_router(user_routers.router)
+
+
+def homepage_intro():
     return "Welcome to Home Page"
 
 
-@app.get("/products")
-def get_all_product():
-    return products
+# Welcom Screen
+@app.get("/")
+def homePage(data=Depends(homepage_intro)):
+    return data
 
 
-@app.post("/product", status_code=status.HTTP_201_CREATED)
-def add_product(product: Product):
-    products.append(product)
-    return {"message": "Product Added Successfully", "product": product}
+# get single header
+@app.get("/header")
+def get_header(user_agent_=Header(None)):
+    return {"User_Agent_": user_agent_}
 
 
-# get product by id
+# Headers testing
+@app.get("/headers/")
+def get_header(request: Request):
+    return {"All headers": request.headers["cookie"]}
 
 
-# @app.get("/product/{id}")
-# def get_product_by_id(id: int):
-#     for i in range(len(products)):
-#         if products[i].id == id:
-#             return products[i]
-#     return "Product Not Found"
+# Cookies testing
+@app.get("/cookies/")
+def get_header(session_id=Cookie(None)):  # we get session Id value fom cookies
+    return {"Session Id": session_id}
 
 
-@app.get("/product/{id}")  # -> {id} isPath parameter
-def get_product_by_id(id: int = None):  # -> querry parameter
-    for prod in products:
-        if prod.id == id:
-            return prod
-    raise HTTPException(status_code=404, detail="Product Not Found")
+# Multiple cookies
+@app.get("/mul_cookies/")
+def get_header(request: Request):
+    return {"Cookies": request.cookies["auth_token"]}
 
 
-# @app.get("/product")
-# def get_product_by_id(request: Request):  # by default request returns in form of object
-#     querry_params = dict(request.query_params)
-#     for prod in products:
-#         if prod.id == int(querry_params.get("id")):
-#             return {"product": prod.id, "Product name": prod.name}
-#     raise HTTPException(status_code=404, detail="Product Not Found")
+# form data
+# used for _user inputs like logins
+# search queries
+@app.post("/login")
+def user_login(
+    username: str = Form(...), password: str = Form(...), age: int = Form(...)
+):
+    return {"User Name": username, "Password": password}
 
 
-@app.delete("/product")
-def delete_product(id: int):
-    for i in range(len(products)):
-        if products[i].id == id:
-            del products[i]
-            return "Product deleted Successfuly"
-    return "Product Not Found"
+## Upload File
+@app.post("/upload_file")
+def upload_file(file: UploadFile = File(...)):
+    return {"message": "File uploaded successfully", "Filename": file.filename}
 
 
-# @app.put("/product/{id}")
-# def update_product(id: int, product: Product):
-#     for i in range(len(products)):
-#         if products[i].id == id:
-#             products[i] = product
-#             return "Product updated Successfully"
-#     return "Failed to update product"
+##Save file
+@app.post("/save_file")
+def save_file(file: UploadFile = File(...)):
+    with open(f"uploads/{file.filename}", "wb") as f:
+        f.write(file.file.read())
+    return {"message": f"File '{file.filename}' save successfully"}
 
 
-@app.put("/product")
-def update_product(id: int, product: Product):
-    for i in range(len(products)):
-        if products[i].id == id:
-            products[i] = product
-            return "Product updated Successfully"
-    return "Failed to update product"
+# Create and save file in a folder
+@app.post("/create_and_save_file")
+def create_save_file(data: FileModel):
+    # create folder
+    os.makedirs("files", exist_ok=True)
+    # file path
+    file_path = f"files/{data.filename}.txt"
+
+    # open file and write data into file
+    with open(file_path, "w") as f:
+        f.write(data.text)
+
+    return {"message": "File created and Saved"}
 
 
-# Nested Pydantic Models
-@app.post("/add_user")
-def add_User(user: User):
-    return {"message": "User addes successfully", "data": user}
+# delete file
+@app.delete("/delete_file")
+def delte_file(filename: str):
+    file_path = f"files/{filename}.txt"
+    if os.path.exists(file_path):
+        os.remove(file_path)
+        return {"message": f"File '{filename}' deleted successfully"}
+    return "No file found"
 
 
-# validation
-@app.post("/register_User", status_code=status.HTTP_202_ACCEPTED)
-def regiter_user(user: User):
-    return {"Message": "User Registered", "Data": user}
+# upload multiple file
+@app.post("/upload_save_mul_files")
+def upload_save_mul_files(files: list[UploadFile] = File(...)):
+    for file in files:
+        with open(f"files/{file.filename}", "wb") as f:
+            f.write(file.file.read())
+    return {"message": "Files  saved Successfully "}
+
+
+# Testing Middel Ware
+@app.middleware("http")
+async def my_middleware(request: Request, call_next):
+    print("Middleware : before handling request")
+
+    # Is the user logged in?
+    # Is there a valid session or JWT token?
+    # Is the token expired?
+    
+    # if good then continue
+    response = await call_next(request)  # Continue to the profile endpoint and Runs it.
+    
+    print("Middleware : after handling request but before returning response")#do any working on response
+        # Add security headers
+        # Compress data
+        # Log request time
+    return response
+
+
+@app.get("/user")
+def get_users():
+    print("Inside get user endpoint")
+    return {"msg": "ALL users"}

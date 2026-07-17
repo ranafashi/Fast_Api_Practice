@@ -1,4 +1,4 @@
-from pydantic import BaseModel, EmailStr, conint, constr, field_validator
+from pydantic import BaseModel, EmailStr, conint, constr, field_validator, Field
 
 
 class Product(BaseModel):
@@ -6,7 +6,8 @@ class Product(BaseModel):
     id: int
     name: str
     description: str
-    price: int = None
+    category: str
+    price: float
     quantity: int = 0
 
 
@@ -16,14 +17,31 @@ class Address(BaseModel):
 
 
 class User(BaseModel):
-    name: constr(pattern=r"^[a-zA-Z0-9]+$")
-    age: conint(gt=0)
+    name: str  # constr(pattern=r"^[a-zA-Z0-9]+$")
+    password: str
+    age: int = Field(gt=0)
     email: EmailStr
     address: Address
 
-    @field_validator("name")
-    @classmethod
-    def nameMustNotHaveSpace(cls, v):
-        if " " in v:
-            raise ValueError("Name Must Not Have Space")
-        return v
+    # @field_validator("name")
+    # @classmethod
+    # def nameMustNotHaveSpace(Class, field):
+    #     if " " in field:
+    #         raise ValueError("Name Must Not Have Space")
+    #     return field
+
+
+class UserResponse(BaseModel):
+    name: str
+    age: int = Field(gt=0)
+    email: EmailStr
+
+
+class DeleteUser(BaseModel):
+    message: str
+    details: UserResponse
+
+
+class FileModel(BaseModel):
+    filename: str
+    text: str
