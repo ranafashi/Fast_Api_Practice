@@ -3,16 +3,19 @@ from fastapi import HTTPException, status
 from pydantic import EmailStr
 from db_config import user_collection
 from models import User
+from log.logs import logger
 
 
 # api Add User
 def add_user_data(user: User):
     if user_collection.find_one({"email": user.email}):
+        logger.warning(f"Add User Failed :{user.email} already exists ")
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST, detail="User already exists"
         )
 
     user_collection.insert_one(user.model_dump())
+    logger.info(f"User Added : {user.email} ")
     return user
 
 
@@ -30,9 +33,14 @@ def delete_user_data(email: EmailStr, name: str = None):
     if name is not None:
         del_filter["name"] = name
     user_data = user_collection.find_one_and_delete(del_filter)
+    
+    logger.info(f"User Deleted : {email} ")
+    
     if user_data is None:
+        logger.warning(f"User Not found : {email} ")
         raise HTTPException(status_code=404, detail="User not found")
     user_data.pop("_id")
+
     return {"message": "User Deleted Successfully", "details": user_data}
 
 
@@ -64,5 +72,3 @@ def avg_age():
         )
     )
     return age
-
-
