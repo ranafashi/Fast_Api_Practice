@@ -1,6 +1,8 @@
 from fastapi import APIRouter, status, Depends
-from models import UserResponse, DeleteUser
+from models import UserResponse, DeleteUser, LoginSchema
 from . import users_functions
+from models import User
+from pydantic import EmailStr
 
 router = APIRouter()
 
@@ -10,8 +12,9 @@ router = APIRouter()
 @router.post(
     "/add_user", response_model=UserResponse, status_code=status.HTTP_201_CREATED
 )
-def add_user(user=Depends(users_functions.add_user_data)):
-    return user
+def add_user(user: User):
+    data = users_functions.add_user_data(user)
+    return data
 
 
 # Users exists if same email or username taken
@@ -22,7 +25,8 @@ def add_user(user=Depends(users_functions.add_user_data)):
 
 # get all users
 @router.get("/get_all_registered_users", status_code=status.HTTP_200_OK)
-def registered_users(data=Depends(users_functions.get_all_users)):
+def registered_users():
+    data = users_functions.get_all_users()
     return data
     # all_users = list(user_collection.find({}, {"_id": 0}))
     # if all_users:
@@ -34,7 +38,8 @@ def registered_users(data=Depends(users_functions.get_all_users)):
 @router.delete(
     "/delete_user", response_model=DeleteUser, status_code=status.HTTP_200_OK
 )
-def delete_user(data=Depends(users_functions.delete_user_data)):
+def delete_user(email: EmailStr, name: str = None):
+    data = users_functions.delete_user_data(email, name)
     return data
 
 
@@ -68,3 +73,9 @@ def get_user_count():
 @router.get("/get_avg_age", status_code=status.HTTP_200_OK)
 def get_avg_age():
     return users_functions.avg_age()
+
+
+# Login functionality
+@router.post("/login", status_code=status.HTTP_200_OK)
+def login(user: LoginSchema):
+    return users_functions.user_login(user)

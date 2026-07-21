@@ -1,6 +1,7 @@
 from pymongo import MongoClient
+from config import settings
 
-client = MongoClient("mongodb://localhost:27017")
-db = client["Fast_API"]
+client = MongoClient(settings.mongodb_url)
+db = client[settings.database_name]
 collection = db["Products"]  # produts
 user_collection = db["Users"]

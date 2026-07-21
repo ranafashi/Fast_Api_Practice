@@ -12,7 +12,7 @@ def all_products():
     if products:
         return products
     raise HTTPException(
-        status_code=status.HTTP_204_NO_CONTENT, detail="No product exists"
+        status_code=status.HTTP_404_NOT_FOUND
     )
 
 
@@ -54,12 +54,12 @@ def add_prod_list(product: list[Product]):
 
 
 # get  multiple products using id
-def get_prods_by_id(id: list[int] = Query(...)):
+def get_prods_by_id(id: list[int]):
     products = list(collection.find({"id": {"$in": id}}, {"_id": 0}))
     if products:
         return products
     raise HTTPException(
-        status_code=status.HTTP_404_NO_CONTENT, detail="No Product found"
+        status_code=status.HTTP_404_NOT_FOUND
     )
 
 
@@ -75,11 +75,13 @@ def update_prod(id: int, product: Product, name: str = None):
         return_document=ReturnDocument.AFTER,
     )
     logger.info(f"Product Updated : id = {id} , name = {name}")
+    if result is None:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND)
     return result
 
 
 # delete product list
-def del_prod_list(id: list[int] = Query(...), name: str = None):
+def del_prod_list(id: list[int], name: str = None):
     filter = {"id": {"$in": id}}
     if name is not None:
         filter["name"] = name

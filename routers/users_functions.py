@@ -2,8 +2,14 @@
 from fastapi import HTTPException, status
 from pydantic import EmailStr
 from db_config import user_collection
-from models import User
+from models import User, LoginSchema
 from log.logs import logger
+from argon2 import PasswordHasher
+from config import settings
+import jwt
+from datetime import datetime,timedelta
+
+ph = PasswordHasher()
 
 
 # api Add User
@@ -13,8 +19,9 @@ def add_user_data(user: User):
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST, detail="User already exists"
         )
-
-    user_collection.insert_one(user.model_dump())
+    data = user.model_dump()
+    data["password"] = ph.hash(user.password)
+    user_collection.insert_one(data)
     logger.info(f"User Added : {user.email} ")
     return user
 
@@ -24,7 +31,7 @@ def get_all_users():
     all_users = list(user_collection.find({}, {"_id": 0}).sort({"name": 1}))
     if all_users:
         return all_users
-    raise HTTPException(status_code=status.HTTP_204_NO_CONTENT)
+    raise HTTPException(status_code=status.HTTP_404_NOT_FOUND)
 
 
 # api delete single user
@@ -33,9 +40,9 @@ def delete_user_data(email: EmailStr, name: str = None):
     if name is not None:
         del_filter["name"] = name
     user_data = user_collection.find_one_and_delete(del_filter)
-    
+
     logger.info(f"User Deleted : {email} ")
-    
+
     if user_data is None:
         logger.warning(f"User Not found : {email} ")
         raise HTTPException(status_code=404, detail="User not found")
@@ -72,3 +79,26 @@ def avg_age():
         )
     )
     return age
+
+
+# Login functionality
+def user_login(user: LoginSchema):
+
+    user_data = user_collection.find_one({"email": user.email})
+    if not user_data:
+
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED, detail="Wrong Email"
+        )
+
+    try:
+        ph.verify(user_data["password"], user.password)
+    except:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED, detail="Wrong Password"
+        )
+    exp_time=datetime.now() + timedelta(minutes=settings.EXP_TIME)
+    token = jwt.encode(
+        {"sub": str(user_data["_id"]),"exp":exp_time}, settings.SECRET_KEY, settings.ALGORITHM
+    )
+    return {"token": token}

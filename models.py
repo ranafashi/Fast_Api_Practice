@@ -45,3 +45,8 @@ class DeleteUser(BaseModel):
 class FileModel(BaseModel):
     filename: str
     text: str
+
+
+class LoginSchema(BaseModel):
+    email: EmailStr
+    password:str

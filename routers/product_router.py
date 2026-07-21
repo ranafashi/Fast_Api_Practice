@@ -8,7 +8,8 @@ router = APIRouter()
 
 # GET all Products
 @router.get("/products", status_code=status.HTTP_200_OK)
-def get_all_product(data=Depends(product_functions.all_products)):
+def get_all_product():
+    data = product_functions.all_products()
     return data
 
     # products = list(
@@ -24,8 +25,9 @@ def get_all_product(data=Depends(product_functions.all_products)):
 
 # adds only 1 Product
 @router.post("/product", status_code=status.HTTP_201_CREATED)
-def add_product(product=Depends(product_functions.add_product)):
-    return product
+def add_product(product: Product):
+    data = product_functions.add_product(product)
+    return data
     # Avoid adding same product with same id
     # if collection.find_one({"id": product.id}):
     #     raise HTTPException(
@@ -42,8 +44,9 @@ def add_product(product=Depends(product_functions.add_product)):
 
 # add multiple products
 @router.post("/add_product_list", status_code=status.HTTP_201_CREATED)
-def add_product_List(product=Depends(product_functions.add_prod_list)):
-    return product
+def add_product_List(product: list[Product]):
+    data = product_functions.add_prod_list(product)
+    return data
     # for p in product:
     #     if collection.find_one({"id": p.id}, {"_id": 0}):
     #         raise HTTPException(
@@ -57,7 +60,8 @@ def add_product_List(product=Depends(product_functions.add_prod_list)):
 
 # get multiple products by using id
 @router.get("/product")  # -> {id} isPath parameter
-def get_product_by_id(data=Depends(product_functions.get_prods_by_id)):
+def get_product_by_id(id: list[int] = Query(...)):
+    data = product_functions.get_prods_by_id(id)
     return data
     # -> querry parameter
     # product = list(collection.find({"id": {"$in": id}}, {"_id": 0}))
@@ -68,8 +72,9 @@ def get_product_by_id(data=Depends(product_functions.get_prods_by_id)):
 
 # UPDATE product
 @router.put("/product", status_code=status.HTTP_200_OK)
-def update_product(product=Depends(product_functions.update_prod)):
-    return product
+def update_product(id: int, product: Product, name: str = None):
+    data = product_functions.update_prod(id, product, name)
+    return data
     # result = collection.find_one_and_update(
     #     {"id": id}, {"$set": product.model_dump()}, {"_id": 0}
     # )
@@ -85,7 +90,8 @@ def update_product(product=Depends(product_functions.update_prod)):
 
 # delets List of product
 @router.delete("/product", status_code=status.HTTP_200_OK)
-def delete_product(data=Depends(product_functions.del_prod_list)):
+def delete_product(id: list[int] = Query(...), name: str = None):
+    data = product_functions.del_prod_list(id, name)
     return data
 
     # filter = {"id": {"$in": id}}
@@ -102,5 +108,5 @@ def delete_product(data=Depends(product_functions.del_prod_list)):
 
 
 @router.get("/prod_categories", status_code=status.HTTP_200_OK)
-def get_prod_categories(category:str = Query(...)):
+def get_prod_categories(category: str = Query(...)):
     return product_functions.prod_categories(category)
