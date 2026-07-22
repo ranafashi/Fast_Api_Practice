@@ -1,8 +1,10 @@
 from fastapi import APIRouter, status, Depends
+from fastapi.security import OAuth2PasswordRequestForm
 from models import UserResponse, DeleteUser, LoginSchema
 from . import users_functions
 from models import User
 from pydantic import EmailStr
+from core.security import get_current_user
 
 router = APIRouter()
 
@@ -43,16 +45,7 @@ def delete_user(email: EmailStr, name: str = None):
     return data
 
 
-# def delete_user(email: EmailStr, name: str = None):
-# del_filter = {"email": email}
-# if name is not None:
-#     del_filter["name"] = name
-# user_data = user_collection.find_one_and_delete(del_filter)
-# if user_data is None:
-#     raise HTTPException(status_code=404, detail="User not found")
-# user_data.pop("_id")
-# return {"message": "User Deleted Successfully", "details": user_data}
-
+ 
 
 # AGGREGATION FUNCTION TESTING
 
@@ -77,5 +70,11 @@ def get_avg_age():
 
 # Login functionality
 @router.post("/login", status_code=status.HTTP_200_OK)
-def login(user: LoginSchema):
-    return users_functions.user_login(user)
+def login(user_data: OAuth2PasswordRequestForm = Depends()):
+    return users_functions.user_login(user_data.username, user_data.password)
+
+
+# provide current user
+@router.get("/me")
+def read_me(current_user: dict = Depends(get_current_user)):
+    return current_user

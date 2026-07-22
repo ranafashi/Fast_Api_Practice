@@ -17,19 +17,13 @@ class Address(BaseModel):
 
 
 class User(BaseModel):
-    name: str  # constr(pattern=r"^[a-zA-Z0-9]+$")
+    name: str  
     password: str
     age: int = Field(gt=0)
     email: EmailStr
     address: Address
-
-    # @field_validator("name")
-    # @classmethod
-    # def nameMustNotHaveSpace(Class, field):
-    #     if " " in field:
-    #         raise ValueError("Name Must Not Have Space")
-    #     return field
-
+    role:str ="customer"
+   
 
 class UserResponse(BaseModel):
     name: str

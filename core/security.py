@@ -6,7 +6,6 @@ from bson import ObjectId  # comes with pymongo
 from config import settings
 from db_config import user_collection
 
-
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login")
 
 
