@@ -1,5 +1,5 @@
 from db_config import collection
-from fastapi import HTTPException, status, Query
+from fastapi import HTTPException, status
 from models import Product
 from pymongo import ReturnDocument
 from log.logs import logger

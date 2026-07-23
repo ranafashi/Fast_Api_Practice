@@ -1,6 +1,7 @@
 from fastapi import APIRouter, status, Depends
 from fastapi.security import OAuth2PasswordRequestForm
-from models import UserResponse, DeleteUser, LoginSchema
+from models import UserResponse, DeleteUser
+from core.security import require_admin
 from . import users_functions
 from models import User
 from pydantic import EmailStr
@@ -27,7 +28,7 @@ def add_user(user: User):
 
 # get all users
 @router.get("/get_all_registered_users", status_code=status.HTTP_200_OK)
-def registered_users():
+def registered_users(admin= Depends(require_admin)):
     data = users_functions.get_all_users()
     return data
     # all_users = list(user_collection.find({}, {"_id": 0}))
@@ -40,31 +41,29 @@ def registered_users():
 @router.delete(
     "/delete_user", response_model=DeleteUser, status_code=status.HTTP_200_OK
 )
-def delete_user(email: EmailStr, name: str = None):
+def delete_user(email: EmailStr, name: str = None, admin=Depends(require_admin)):
     data = users_functions.delete_user_data(email, name)
     return data
 
-
- 
 
 # AGGREGATION FUNCTION TESTING
 
 
 # Projects Users name and cities
 @router.get("/get_users_cities", status_code=status.HTTP_200_OK)
-def get_users_cities():
+def get_users_cities(admin=Depends(require_admin)):
     return users_functions.user_cities()
 
 
 # Grouped users based on Cities
 @router.get("/get_user_count", status_code=status.HTTP_200_OK)
-def get_user_count():
+def get_user_count(admin=Depends(require_admin)):
     return users_functions.user_count()
 
 
 # avg age of User from each city
 @router.get("/get_avg_age", status_code=status.HTTP_200_OK)
-def get_avg_age():
+def get_avg_age(admin=Depends(require_admin)):
     return users_functions.avg_age()
 
 

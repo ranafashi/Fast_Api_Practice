@@ -49,4 +49,26 @@
       "postal_Code": 46000
     }
   }
+   {
+    "name": "Fatima Noor",
+    "password": "Fatima@789",
+    "age": 22,
+    "email": "fatima.noor@example.com",
+    "address": {
+      "city": "Islamabad",
+      "postal_Code": 44000
+    },
+    "role": "customer"
+  },
+  {
+  "name": "Abdul Qadir",
+  "password": "12345",
+  "age": 31,
+  "email": "abdulQadir@gmail.com",
+  "address": {
+    "city": "Karachi",
+    "postal_Code": 45550
+  },
+  "role": "admin"
+}
 ]

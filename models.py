@@ -24,6 +24,27 @@ class User(BaseModel):
     address: Address
     role:str ="customer"
    
+class CartItem(BaseModel):
+    id:int
+    name:str
+    price:float
+    quantity:int=Field(gt=0)
+    
+    
+    
+class Cart(BaseModel):
+    user_id:str
+    items:list[CartItem]
+
+
+class AddToCart(BaseModel):
+    product_id:int
+    product_name:str | None
+    quantity:int = Field(gt=0)
+    
+class UpdateQuantity(BaseModel):
+    quantity:int = Field(gt=0)
+
 
 class UserResponse(BaseModel):
     name: str

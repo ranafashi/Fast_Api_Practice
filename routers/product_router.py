@@ -2,7 +2,7 @@ from fastapi import APIRouter, status, HTTPException, Query, Depends
 from db_config import collection
 from models import Product
 from . import product_functions
-from core.security import reuire_admin
+from core.security import require_admin
 router = APIRouter()
 
 
@@ -15,7 +15,7 @@ def get_all_product():
 
 # adds only 1 Product
 @router.post("/product", status_code=status.HTTP_201_CREATED)
-def add_product(product: Product, admin=Depends(reuire_admin)):
+def add_product(product: Product, admin=Depends(require_admin)):
     data = product_functions.add_product(product)
     return data
 
@@ -27,7 +27,7 @@ def add_product(product: Product, admin=Depends(reuire_admin)):
 )
 def add_product_List(
     product: list[Product],
-    admin=Depends(reuire_admin),
+    admin=Depends(require_admin),
 ):
     data = product_functions.add_prod_list(product)
     return data
@@ -43,7 +43,7 @@ def get_product_by_id(id: list[int] = Query(...)):
 # UPDATE product
 @router.put("/product", status_code=status.HTTP_200_OK)
 def update_product(
-    id: int, product: Product, name: str = None, admin=Depends(reuire_admin)
+    id: int, product: Product, name: str = None, admin=Depends(require_admin)
 ):
     data = product_functions.update_prod(id, product, name)
     return data
@@ -52,7 +52,7 @@ def update_product(
 # delets List of product
 @router.delete("/product", status_code=status.HTTP_200_OK)
 def delete_product(
-    id: list[int] = Query(...), name: str = None, admin=Depends(reuire_admin)
+    id: list[int] = Query(...), name: str = None, admin=Depends(require_admin)
 ):
     data = product_functions.del_prod_list(id, name)
     return data
