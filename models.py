@@ -1,4 +1,5 @@
 from pydantic import BaseModel, EmailStr, conint, constr, field_validator, Field
+from datetime import datetime, timezone
 
 
 class Product(BaseModel):
@@ -9,6 +10,8 @@ class Product(BaseModel):
     category: str
     price: float
     quantity: int = 0
+    # Optional custom URL; if omitted, API resolves a real photo from name/category
+    image_url: str | None = None
 
 
 class Address(BaseModel):
@@ -17,33 +20,34 @@ class Address(BaseModel):
 
 
 class User(BaseModel):
-    name: str  
+    name: str
     password: str
     age: int = Field(gt=0)
     email: EmailStr
     address: Address
-    role:str ="customer"
-   
+    role: str = "customer"
+
+
 class CartItem(BaseModel):
-    id:int
-    name:str
-    price:float
-    quantity:int=Field(gt=0)
-    
-    
-    
+    id: int
+    name: str
+    price: float
+    quantity: int = Field(gt=0)
+
+
 class Cart(BaseModel):
-    user_id:str
-    items:list[CartItem]
+    user_id: str
+    items: list[CartItem]
 
 
 class AddToCart(BaseModel):
-    product_id:int
-    product_name:str | None
-    quantity:int = Field(gt=0)
-    
+    product_id: int
+    product_name: str | None
+    quantity: int = Field(gt=0)
+
+
 class UpdateQuantity(BaseModel):
-    quantity:int = Field(gt=0)
+    quantity: int = Field(gt=0)
 
 
 class UserResponse(BaseModel):
@@ -64,4 +68,20 @@ class FileModel(BaseModel):
 
 class LoginSchema(BaseModel):
     email: EmailStr
-    password:str
+    password: str
+
+
+class OrderItem(BaseModel):
+    product_id: int
+    name: str
+    quantity: int
+    price: float
+
+
+class Order(BaseModel):
+    order_id: str
+    user_id: str
+    items: list[OrderItem]
+    total: float
+    status: str = "pending"
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))

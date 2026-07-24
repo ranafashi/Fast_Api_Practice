@@ -1,8 +1,8 @@
-from fastapi import APIRouter, status, HTTPException, Query, Depends
-from db_config import collection
+from fastapi import APIRouter, status, Query, Depends
 from models import Product
 from . import product_functions
 from core.security import require_admin
+
 router = APIRouter()
 
 
@@ -11,6 +11,16 @@ router = APIRouter()
 def get_all_product():
     data = product_functions.all_products()
     return data
+
+
+# Resolve a real product image (by id, or by name/category)
+@router.get("/product_image", status_code=status.HTTP_200_OK)
+def get_product_image(
+    id: int | None = Query(None, description="Product id"),
+    name: str | None = Query(None),
+    category: str | None = Query(None),
+):
+    return product_functions.resolve_product_image(id, name, category)
 
 
 # adds only 1 Product
@@ -23,7 +33,7 @@ def add_product(product: Product, admin=Depends(require_admin)):
 # add multiple products
 @router.post(
     "/add_product_list",
-    status_code=status.HTTP_201_CREATED
+    status_code=status.HTTP_201_CREATED,
 )
 def add_product_List(
     product: list[Product],
@@ -34,7 +44,7 @@ def add_product_List(
 
 
 # get multiple products by using id
-@router.get("/product") 
+@router.get("/product")
 def get_product_by_id(id: list[int] = Query(...)):
     data = product_functions.get_prods_by_id(id)
     return data

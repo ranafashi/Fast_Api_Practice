@@ -6,3 +6,4 @@ db = client[settings.database_name]
 collection = db["Products"]  # produts
 user_collection = db["Users"]
 carts =db["Carts"]
+order_collection = db["Orders"]

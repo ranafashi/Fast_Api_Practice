@@ -87,7 +87,7 @@ def user_login(email: str, password: str):
 
     user_data = user_collection.find_one({"email": email})
     if not user_data:
-
+        logger.warning(f"Login failed - no such user: {email}")
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid email or password"
         )
@@ -95,11 +95,16 @@ def user_login(email: str, password: str):
     try:
         ph.verify(user_data["password"], password)
     except VerifyMismatchError:
+        logger.warning(f"Login failed - wrong password: {email}")
         raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid email or password "
+            status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid email or password"
         )
-    exp_time=datetime.now(timezone.utc) + timedelta(minutes=settings.EXP_TIME)
+
+    exp_time = datetime.now(timezone.utc) + timedelta(minutes=settings.EXP_TIME)
     token = jwt.encode(
-        {"sub": str(user_data["_id"]),"exp":exp_time}, settings.SECRET_KEY, algorithm=settings.ALGORITHM
+        {"sub": str(user_data["_id"]), "exp": exp_time},
+        settings.SECRET_KEY,
+        algorithm=settings.ALGORITHM,
     )
+    logger.info(f"Login success: {email}")
     return {"access_token": token, "token_type": "bearer"}
