@@ -1,6 +1,11 @@
 {
     "buildCommand": "cd frontend && npm install && npm run build",
     "outputDirectory": "frontend/.next",
+    "functions": {
+        "api/main.py": {
+            "includeFiles": "{db_config.py,config.py,models.py,core/**,routers/**,files/**}"
+        }
+    },
     "rewrites": [
         {
             "source": "/api/(.*)",
