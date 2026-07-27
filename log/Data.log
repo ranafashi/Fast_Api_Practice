@@ -1,0 +1,157 @@
+2026-07-17 15:39:18,897 | WARNING | product_functions.py | Add Product Failed :55 already exists 
+2026-07-17 15:48:44,268 | INFO | users_functions.py | User Added : mohsinGujjar@gmail.com 
+2026-07-17 15:50:28,259 | WARNING | users_functions.py | Add User Failed :mohsinGujjar@gmail.com already exists 
+2026-07-17 15:55:22,386 | INFO | users_functions.py | User Deleted : mohsinGujjar@gmail.com 
+2026-07-17 15:55:40,359 | INFO | users_functions.py | User Deleted : mohsinGujjar@gmail.com 
+2026-07-17 15:55:40,359 | WARNING | users_functions.py | User Not found : mohsinGujjar@gmail.com 
+2026-07-17 16:01:19,121 | WARNING | product_functions.py | Product Already Exists
+2026-07-17 16:02:51,331 | WARNING | product_functions.py | Duplicate IDs
+2026-07-17 16:06:56,306 | INFO | product_functions.py | Product Updated : id = 1 , name = None
+2026-07-17 16:08:17,347 | INFO | product_functions.py | Product Updated : id = 1 , name = Creatine Monohydrate
+2026-07-21 09:55:34,803 | INFO | product_functions.py | Product added: id=56, name='Water pistol'
+2026-07-21 09:57:08,809 | INFO | product_functions.py | Product Updated : id = 1 , name = Creatine Monohydrate
+2026-07-21 09:57:51,024 | INFO | product_functions.py | Product Updated : id = 1 , name = Whey Protein
+
+2026-07-21 09:58:19,378 | INFO | product_functions.py | Product Updated : id = 1 , name = None
+2026-07-21 09:59:31,125 | INFO | users_functions.py | User Added : hasnatRasool@gmail.com 
+2026-07-21 09:59:38,894 | WARNING | product_functions.py | Duplicate IDs
+2026-07-21 10:01:06,982 | INFO | users_functions.py | User Deleted : mohsinGujjar@gmail.com 
+2026-07-21 10:01:06,983 | WARNING | users_functions.py | User Not found : mohsinGujjar@gmail.com 
+2026-07-21 10:01:23,316 | INFO | users_functions.py | User Deleted : hasnatRasool@gmail.com 
+2026-07-21 11:57:52,793 | INFO | product_functions.py | Product added: id=57, name='HP EliteBook 850 G6'
+2026-07-21 12:18:37,509 | INFO | users_functions.py | User Added : zohaibSafdar@gmail.com 
+2026-07-21 12:22:22,321 | INFO | users_functions.py | User Added : aliraza@gmail.com 
+2026-07-21 12:22:42,253 | INFO | users_functions.py | User Added : ahmedkhan@gmail.com 
+2026-07-21 12:22:55,016 | INFO | users_functions.py | User Added : usmantariq@gmail.com 
+2026-07-21 12:23:06,512 | INFO | users_functions.py | User Added : hassanali@gmail.com 
+2026-07-21 12:23:17,308 | INFO | users_functions.py | User Added : bilalahmed@gmail.com 
+2026-07-21 12:23:28,574 | INFO | users_functions.py | User Added : hamzashah@gmail.com 
+2026-07-21 12:23:41,414 | INFO | users_functions.py | User Added : saadmalik@gmail.com 
+2026-07-21 12:23:51,331 | INFO | users_functions.py | User Added : talhaiqbal@gmail.com 
+2026-07-21 12:24:02,473 | INFO | users_functions.py | User Added : ahsannoor@gmail.com 
+2026-07-21 12:24:17,503 | INFO | users_functions.py | User Added : danishaslam@gmail.com 
+2026-07-21 12:24:27,837 | INFO | users_functions.py | User Added : farhanjaved@gmail.com 
+2026-07-21 12:24:40,002 | INFO | users_functions.py | User Added : imransiddiqui@gmail.com 
+2026-07-21 12:24:51,667 | INFO | users_functions.py | User Added : shahzaibqureshi@gmail.com 
+2026-07-21 12:25:04,538 | INFO | users_functions.py | User Added : owaisnadeem@gmail.com 
+2026-07-21 14:53:12,070 | WARNING | users_functions.py | Add User Failed :zohaibSafdar@gmail.com already exists 
+2026-07-21 14:59:46,227 | WARNING | users_functions.py | Add User Failed :ahmedkhan@gmail.com already exists 
+2026-07-21 15:09:25,611 | INFO | users_functions.py | User Added : ranaZawar@gmail.com 
+2026-07-22 11:52:05,492 | INFO | users_functions.py | User Added : ranafashi@gmail.com 
+2026-07-22 14:04:21,724 | INFO | users_functions.py | User Added : ranafashi@gmail.com 
+2026-07-22 14:07:15,915 | WARNING | users_functions.py | Add User Failed :ranafashi@gmail.com already exists 
+2026-07-22 14:07:37,579 | INFO | users_functions.py | User Added : ranazawar@gmail.com 
+2026-07-22 14:09:46,433 | INFO | users_functions.py | User Added : ahmed.khan@gmail.com 
+2026-07-22 14:09:58,794 | INFO | users_functions.py | User Added : ali.sheikh@gmail.com 
+2026-07-22 14:10:10,404 | INFO | users_functions.py | User Added : usman.ali@gmail.com 
+2026-07-22 14:10:20,385 | INFO | users_functions.py | User Added : hamza.iqbal@gmail.com 
+2026-07-22 14:15:15,034 | INFO | product_functions.py | Product added: id=59, name='Notebook'
+2026-07-23 10:27:30,286 | INFO | users_functions.py | User Added : fatima.noor@example.com 
+2026-07-23 12:21:54,990 | INFO | users_functions.py | User Added : hamzaALIabbassi@gmail.com 
+2026-07-23 14:02:41,278 | INFO | product_functions.py | Product added: id=53, name='Wooden Chair'
+2026-07-23 14:05:12,857 | INFO | product_functions.py | Product Updated : id = 2 , name = Smartphone
+2026-07-23 14:09:53,527 | INFO | users_functions.py | User Added : abdulQadir@gmail.com 
+2026-07-23 14:11:56,338 | INFO | users_functions.py | User Deleted : abdulQadir@gmail.com 
+2026-07-23 14:11:56,338 | WARNING | users_functions.py | User Not found : abdulQadir@gmail.com 
+2026-07-23 14:12:27,577 | INFO | users_functions.py | User Deleted : abdulQadir@gmail.com 
+2026-07-23 14:12:27,577 | WARNING | users_functions.py | User Not found : abdulQadir@gmail.com 
+2026-07-23 14:12:34,518 | INFO | users_functions.py | User Deleted : abdulQadir@gmail.com 
+2026-07-23 16:14:16,468 | INFO | users_functions.py | User Added : rananoor@gmail.com 
+2026-07-23 16:48:58,639 | WARNING | users_functions.py | Add User Failed :hamzaALIabbassi@gmail.com already exists 
+2026-07-24 11:00:54,063 | INFO | users_functions.py | User Added : hammadjamil@gmail.com 
+2026-07-24 11:56:20,462 | INFO | users_functions.py | User Added : hamadjamil@gmail.com 
+2026-07-24 11:56:20,587 | INFO | users_functions.py | Login success: hamadjamil@gmail.com
+2026-07-24 11:57:16,090 | INFO | order_functions.py | Order placed: order_id=10404de2-e464-4f24-a8c8-3eb2b4878267, user=6a630c943f0bd5d3876d05eb, total=27000.0
+2026-07-24 11:57:18,892 | ERROR | email_utils.py | Order email failed: order_id=10404de2-e464-4f24-a8c8-3eb2b4878267 - (535, b'5.7.8 Username and Password not accepted. For more information, go to\n5.7.8  https://support.google.com/mail/?p=BadCredentials ffacd0b85a97d-47f85b9a659sm22704704f8f.6 - gsmtp')
+2026-07-24 12:16:37,308 | INFO | order_functions.py | Order placed: order_id=41cbcc5b-01e4-4095-a5fd-604a36941d5f, user=6a630c943f0bd5d3876d05eb, total=100000.0
+2026-07-24 12:16:42,137 | INFO | email_utils.py | Order email sent: order_id=41cbcc5b-01e4-4095-a5fd-604a36941d5f
+2026-07-24 12:17:46,624 | INFO | users_functions.py | Login success: ranafashi@gmail.com
+2026-07-24 12:21:55,120 | INFO | product_functions.py | Product Updated : id = 1 , name = None
+2026-07-24 12:23:22,654 | INFO | product_functions.py | Product Updated : id = 2 , name = None
+2026-07-24 12:23:38,463 | INFO | product_functions.py | Product Updated : id = 3 , name = None
+2026-07-24 12:23:48,155 | INFO | product_functions.py | Product Updated : id = 4 , name = None
+2026-07-24 12:23:59,838 | INFO | product_functions.py | Product Updated : id = 5 , name = None
+2026-07-24 12:24:11,296 | INFO | product_functions.py | Product Updated : id = 6 , name = None
+2026-07-24 12:24:27,239 | INFO | product_functions.py | Product Updated : id = 7 , name = None
+2026-07-24 12:24:50,537 | INFO | product_functions.py | Product Updated : id = 8 , name = None
+2026-07-24 12:25:46,442 | INFO | product_functions.py | Product Updated : id = 9 , name = None
+2026-07-24 12:26:01,022 | INFO | product_functions.py | Product Updated : id = 10 , name = None
+2026-07-24 12:26:13,922 | INFO | product_functions.py | Product Updated : id = 11 , name = None
+2026-07-24 12:26:25,214 | INFO | product_functions.py | Product Updated : id = 12 , name = None
+2026-07-24 12:26:41,810 | INFO | product_functions.py | Product Updated : id = 13 , name = None
+2026-07-24 12:26:53,704 | INFO | product_functions.py | Product Updated : id = 14 , name = None
+2026-07-24 12:27:05,444 | INFO | product_functions.py | Product Updated : id = 15 , name = None
+2026-07-24 12:27:21,810 | INFO | product_functions.py | Product Updated : id = 16 , name = None
+2026-07-24 12:27:39,301 | INFO | product_functions.py | Product Updated : id = 17 , name = None
+2026-07-24 12:27:56,463 | INFO | product_functions.py | Product Updated : id = 18 , name = None
+2026-07-24 12:28:08,689 | INFO | product_functions.py | Product Updated : id = 19 , name = None
+2026-07-24 12:28:21,643 | INFO | product_functions.py | Product Updated : id = 20 , name = None
+2026-07-24 12:28:56,949 | INFO | product_functions.py | Product Updated : id = 21 , name = None
+2026-07-24 12:29:15,143 | INFO | product_functions.py | Product Updated : id = 22 , name = None
+2026-07-24 12:29:31,696 | INFO | product_functions.py | Product Updated : id = 23 , name = None
+2026-07-24 12:29:46,824 | INFO | product_functions.py | Product Updated : id = 53 , name = None
+2026-07-24 12:30:50,902 | INFO | product_functions.py | Product Updated : id = 57 , name = None
+2026-07-24 12:31:35,661 | INFO | product_functions.py | Product Updated : id = 59 , name = None
+2026-07-24 12:32:20,928 | INFO | product_functions.py | Product Updated : id = 11 , name = None
+2026-07-24 12:32:44,084 | INFO | product_functions.py | Product Updated : id = 10 , name = None
+2026-07-24 12:33:13,791 | INFO | product_functions.py | Product Updated : id = 8 , name = None
+2026-07-24 12:33:36,070 | INFO | product_functions.py | Product Updated : id = 12 , name = None
+2026-07-24 12:34:22,670 | INFO | product_functions.py | Product Updated : id = 7 , name = None
+2026-07-24 12:34:49,446 | INFO | product_functions.py | Product Updated : id = 14 , name = None
+2026-07-24 12:35:14,184 | INFO | product_functions.py | Product Updated : id = 5 , name = None
+2026-07-24 12:35:47,789 | INFO | product_functions.py | Product Updated : id = 4 , name = None
+2026-07-24 12:36:20,356 | INFO | product_functions.py | Product Updated : id = 3 , name = None
+2026-07-24 12:37:20,173 | INFO | product_functions.py | Product Updated : id = 13 , name = None
+2026-07-24 12:37:51,257 | INFO | product_functions.py | Product Updated : id = 15 , name = None
+2026-07-24 12:40:53,194 | INFO | users_functions.py | Login success: ranafashi@gmail.com
+2026-07-24 12:41:48,436 | INFO | product_functions.py | Product Updated : id = 19 , name = None
+2026-07-24 12:42:24,525 | INFO | product_functions.py | Product Updated : id = 22 , name = None
+2026-07-24 12:42:46,344 | INFO | product_functions.py | Product Updated : id = 6 , name = None
+2026-07-24 12:43:18,450 | INFO | product_functions.py | Product Updated : id = 2 , name = None
+2026-07-24 12:43:45,117 | INFO | product_functions.py | Product Updated : id = 1 , name = None
+2026-07-24 12:44:21,931 | INFO | product_functions.py | Product Updated : id = 16 , name = None
+2026-07-24 12:44:57,449 | INFO | product_functions.py | Product Updated : id = 20 , name = None
+2026-07-24 12:45:20,300 | INFO | product_functions.py | Product Updated : id = 23 , name = None
+2026-07-24 12:45:48,537 | INFO | product_functions.py | Product Updated : id = 56 , name = None
+2026-07-24 12:46:21,066 | INFO | users_functions.py | User Deleted : hamadjamil@gmail.com 
+2026-07-24 12:51:56,554 | INFO | product_functions.py | Product added: id=24, name='Nike Air Zoom Pegasus 41'
+2026-07-24 12:52:15,590 | WARNING | product_functions.py | Add Product Failed :24 already exists 
+2026-07-24 12:52:22,802 | WARNING | product_functions.py | Add Product Failed :24 already exists 
+2026-07-24 12:54:56,608 | INFO | product_functions.py | Product added: id=25, name='PlayStation 5 DualSense Wireless Controller'
+2026-07-24 12:54:59,540 | WARNING | product_functions.py | Add Product Failed :25 already exists 
+2026-07-24 12:56:42,846 | INFO | product_functions.py | Product added: id=26, name='Philips OneBlade Pro'
+2026-07-24 12:56:44,747 | WARNING | product_functions.py | Add Product Failed :26 already exists 
+2026-07-24 12:58:29,253 | INFO | product_functions.py | Product added: id=58, name='Yamaha F310 Acoustic Guitar'
+2026-07-24 12:58:32,219 | WARNING | product_functions.py | Add Product Failed :58 already exists 
+2026-07-24 12:59:23,101 | INFO | order_functions.py | Order placed: order_id=02e63bbf-8b98-4271-bd74-6729eda2fb5c, user=6a608795e6ce78f55f98b650, total=199.99
+2026-07-24 12:59:26,731 | INFO | email_utils.py | Order email sent: order_id=02e63bbf-8b98-4271-bd74-6729eda2fb5c
+2026-07-24 13:03:44,662 | INFO | product_functions.py | Product added: id=27, name='Bowflex SelectTech 552 Adjustable Dumbbells'
+2026-07-24 13:04:56,574 | INFO | product_functions.py | Product added: id=28, name='Optimum Nutrition Gold Standard Whey'
+2026-07-24 13:05:46,344 | INFO | product_functions.py | Product added: id=29, name='Premium Non-Slip Yoga Mat'
+2026-07-24 13:05:48,765 | WARNING | product_functions.py | Add Product Failed :29 already exists 
+2026-07-24 13:08:14,464 | INFO | product_functions.py | Product added: id=30, name='Logitech MX Master 3S'
+2026-07-24 13:09:28,143 | INFO | product_functions.py | Product added: id=31, name='Anker 7-in-1 USB-C Hub'
+2026-07-24 13:09:30,134 | WARNING | product_functions.py | Add Product Failed :31 already exists 
+2026-07-24 14:42:57,911 | INFO | users_functions.py | Login success: ranazawar@gmail.com
+2026-07-24 14:44:33,631 | INFO | order_functions.py | Order placed: order_id=578d7831-bcef-418f-97fe-bd9d4be91021, user=6a608859e6ce78f55f98b651, total=8400.0
+2026-07-24 14:44:37,648 | INFO | email_utils.py | Order email sent: order_id=578d7831-bcef-418f-97fe-bd9d4be91021
+2026-07-24 14:47:54,630 | INFO | users_functions.py | Login success: ranafashi@gmail.com
+2026-07-24 14:49:53,406 | WARNING | users_functions.py | Login failed - no such user: ranafashi789@gmail.com
+2026-07-24 14:50:00,539 | INFO | users_functions.py | Login success: ranafashi@gmail.com
+2026-07-24 14:55:00,925 | INFO | users_functions.py | Login success: ranafashi@gmail.com
+2026-07-24 14:55:07,899 | WARNING | product_functions.py | Product Already Exists
+2026-07-24 15:02:39,451 | INFO | product_functions.py | Product Updated : id = 32 , name = None
+2026-07-24 15:18:22,747 | INFO | product_functions.py | Product Updated : id = 1 , name = None
+2026-07-24 15:19:09,764 | INFO | product_functions.py | Product Updated : id = 34 , name = None
+2026-07-24 15:19:33,665 | INFO | product_functions.py | Product Updated : id = 42 , name = None
+2026-07-24 15:20:36,268 | WARNING | users_functions.py | Login failed - no such user: ranafashi789@gmail.com
+2026-07-24 15:20:42,628 | INFO | users_functions.py | Login success: ranafashi@gmail.com
+2026-07-24 15:33:44,791 | WARNING | users_functions.py | Login failed - wrong password: hammadjamil@gmail.com
+2026-07-24 15:33:44,967 | WARNING | users_functions.py | Login failed - wrong password: hammadjamil@gmail.com
+2026-07-24 15:33:56,527 | INFO | users_functions.py | Login success: hammadjamil@gmail.com
+2026-07-24 15:35:33,926 | INFO | order_functions.py | Order placed: order_id=f9475bd7-20d1-4302-b4eb-777f30d18adf, user=6a62ff9666b4c36bc5867a36, total=805.0
+2026-07-24 15:35:37,739 | INFO | email_utils.py | Order email sent: order_id=f9475bd7-20d1-4302-b4eb-777f30d18adf
+2026-07-27 10:13:55,080 | INFO | users_functions.py | User Added : ranasawood@gmail.com 
+2026-07-27 10:13:55,430 | INFO | users_functions.py | Login success: ranasawood@gmail.com
+2026-07-27 10:14:10,339 | INFO | order_functions.py | Order placed: order_id=ab7e02a8-6c56-48a5-8636-b11fc71042d5, user=6a66e9120bdd1cb5e6facb74, total=149.99
+2026-07-27 10:14:14,209 | INFO | email_utils.py | Order email sent: order_id=ab7e02a8-6c56-48a5-8636-b11fc71042d5

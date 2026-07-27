@@ -1,6 +1,6 @@
 __pycache__/
 *.pyc
-log/
+*.log/
 venv/
 .env
 frontend/node_modules/

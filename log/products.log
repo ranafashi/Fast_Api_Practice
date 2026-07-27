@@ -1,0 +1,2 @@
+2026-07-17 15:35:10,648 | INFO | product_functions.py | Product added: id=55, name='Water Baloons'
+2026-07-17 15:35:38,317 | WARNING | product_functions.py | Add Product Failed :55 already exists 
