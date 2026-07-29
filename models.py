@@ -1,6 +1,5 @@
-from pydantic import BaseModel, EmailStr, conint, constr, field_validator, Field
+from pydantic import BaseModel, EmailStr,Field
 from datetime import datetime, timezone
-
 
 class Product(BaseModel):
 
@@ -10,7 +9,6 @@ class Product(BaseModel):
     category: str
     price: float
     quantity: int = 0
-    # Optional custom URL; if omitted, API resolves a real photo from name/category
     image_url: str | None = None
 
 
@@ -34,11 +32,9 @@ class CartItem(BaseModel):
     price: float
     quantity: int = Field(gt=0)
 
-
 class Cart(BaseModel):
     user_id: str
     items: list[CartItem]
-
 
 class AddToCart(BaseModel):
     product_id: int
@@ -76,7 +72,6 @@ class OrderItem(BaseModel):
     name: str
     quantity: int
     price: float
-
 
 class Order(BaseModel):
     order_id: str
