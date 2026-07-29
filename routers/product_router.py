@@ -5,7 +5,6 @@ from core.security import require_admin
 
 router = APIRouter()
 
-
 # GET all Products
 @router.get("/products", status_code=status.HTTP_200_OK)
 def get_all_product():
