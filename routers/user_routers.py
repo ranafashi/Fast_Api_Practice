@@ -19,35 +19,19 @@ def add_user(user: User):
     data = users_functions.add_user_data(user)
     return data
 
-
-# Users exists if same email or username taken
-# if user_collection.find_one({"email": user.email}):
-#     raise HTTPException(status_code=404, detail="Account Already Exist")
-# user_collection.insert_one(user.model_dump())
-
-
 # get all users
 @router.get("/get_all_registered_users", status_code=status.HTTP_200_OK)
 def registered_users(admin= Depends(require_admin)):
     data = users_functions.get_all_users()
     return data
-    # all_users = list(user_collection.find({}, {"_id": 0}))
-    # if all_users:
-    #     return all_users
-    # raise HTTPException(status_code=status.HTTP_204_NO_CONTENT)
-
-
-# delte single User
+   
+# delete single User
 @router.delete(
     "/delete_user", response_model=DeleteUser, status_code=status.HTTP_200_OK
 )
 def delete_user(email: EmailStr, name: str = None, admin=Depends(require_admin)):
     data = users_functions.delete_user_data(email, name)
     return data
-
-
-# AGGREGATION FUNCTION TESTING
-
 
 # Projects Users name and cities
 @router.get("/get_users_cities", status_code=status.HTTP_200_OK)
