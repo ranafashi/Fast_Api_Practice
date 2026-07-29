@@ -3,7 +3,7 @@ from config import settings
 
 client = MongoClient(settings.mongodb_url)
 db = client[settings.database_name]
-collection = db["Products"]  # produts
+collection = db["Products"]  
 user_collection = db["Users"]
 carts =db["Carts"]
 order_collection = db["Orders"]
