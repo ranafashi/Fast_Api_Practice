@@ -1,4 +1,3 @@
-# includes dependency functions for users_only
 from fastapi import HTTPException, status
 from pydantic import EmailStr
 from db_config import user_collection
@@ -52,7 +51,7 @@ def delete_user_data(email: EmailStr, name: str = None):
     return {"message": "User Deleted Successfully", "details": user_data}
 
 
-# AGGREGATION FUNCTIONS TESTING
+# AGGREGATION FUNCTIONS 
 def user_cities():
     users_data = list(
         user_collection.aggregate(
