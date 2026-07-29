@@ -5,7 +5,6 @@ from db_config import order_collection, carts, collection
 from . import cart_functions
 from log.logs import logger
 
-
 def _public_order(doc: dict) -> dict:
     order = dict(doc)
     order.pop("_id", None)
