@@ -8,7 +8,6 @@ from .image_utils import build_product_image_url, ensure_product_image
 
 # api get all products
 
-
 def all_products():
     products = list(collection.find({}, {"_id": 0}).sort({"id": 1}))
     if not products:
