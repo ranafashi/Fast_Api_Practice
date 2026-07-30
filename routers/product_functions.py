@@ -7,29 +7,24 @@ from .image_utils import build_product_image_url, ensure_product_image
 
 
 # api get all products
+
+
 def all_products():
     products = list(collection.find({}, {"_id": 0}).sort({"id": 1}))
     if not products:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND)
-    return products
 
-
-# def all_products():
-#     products = list(collection.find({}, {"_id": 0}).sort({"id": 1}))
-#     if not products:
-#         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND)
-
-#     enriched = []
-#     for product in products:
-#         updated = ensure_product_image(product, refresh_auto=True)
-#         # Persist newly resolved name-based images so later loads stay fast/stable
-#         if updated.get("image_url") and updated.get("image_url") != product.get("image_url"):
-#             collection.update_one(
-#                 {"id": product["id"]},
-#                 {"$set": {"image_url": updated["image_url"]}},
-#             )
-#         enriched.append(updated)
-#     return enriched
+    enriched = []
+    for product in products:
+        updated = ensure_product_image(product, refresh_auto=True)
+        # Persist newly resolved name-based images so later loads stay fast/stable
+        if updated.get("image_url") and updated.get("image_url") != product.get("image_url"):
+            collection.update_one(
+                {"id": product["id"]},
+                {"$set": {"image_url": updated["image_url"]}},
+            )
+        enriched.append(updated)
+    return enriched
 
 
 def _prepare_product_doc(product: Product) -> dict:
